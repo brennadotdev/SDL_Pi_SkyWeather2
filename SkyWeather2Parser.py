@@ -4,7 +4,7 @@
 
 def parseFromRtl433(rtlJson):
     
-    parsedTemperature = round(((((rtlJson["temperature"] - 400)/10.0) - 32.0)/(9.0/5.0)),2)
+    parsedTemperature = round(((((rtlJson["temperature"] - 400)/10.0) - 32.0)/(9.0/5.0)), 2)
     parsedLight = rtlJson["light"]
     if (parsedLight >= 0x1fffa):
         parsedLight = parsedLight | 0x7fff0000
@@ -27,7 +27,7 @@ def parseFromRtl433(rtlJson):
             "direction": rtlJson["winddirection"]
         },
         "rain": {
-          "total": round(rtlJson["cumulativerain"]/10.0,1)  
+          "total": round(rtlJson["cumulativerain"]/10.0, 1)  
         },
         "barometric": {
             "temperature": 0,

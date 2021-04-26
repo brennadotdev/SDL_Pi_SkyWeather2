@@ -12,7 +12,7 @@ def main():
 
     for line in sys.stdin:
         if ("FT020T" in line):
-            client.publish("sw2/data", SkyWeather2Parser.parseFromRtl433(json.loads(line)))
+            client.publish("sw2/data", json.dumps(SkyWeather2Parser.parseFromRtl433(json.loads(line))))
 
     time.sleep(2)
     client.loop_stop()
