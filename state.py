@@ -95,6 +95,9 @@ pastBarometricReading = 0
 AQI = 0.0
 Hour24_AQI = 0.0
 
+PM_2_5_Concentration = 0.0
+PM_10_Concentration = 0.0
+
 # WeatherSense AQI Values
 WS_AQI = 0.0
 WS_Hour24_AQI = 0.0
@@ -188,6 +191,10 @@ def printState():
 
     print ("AQI = ",  AQI )
     print ("Hour24_AQI = ",  Hour24_AQI )
+    
+    print ("PM_2_5_Concentration", PM_2_5_Concentration)
+    print ("PM_10_Concentration", PM_10_Concentration)
+    
     print ("WS_AQI = ",  WS_AQI )
     print ("WS_Hour24_AQI = ",  WS_Hour24_AQI )
     print ("Main Battery Status = ",  BatteryOK )

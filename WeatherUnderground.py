@@ -52,6 +52,9 @@ def sendWeatherUndergroundData(Rain24Hour):
 
             myURL += "&software=SkyWeather2"
 
+            if (config.DustSensor_Present):
+                myURL += "&AqPM2.5=%0.2f"% state.PM_2_5_Concentration
+                myURL += "&AqPM10=%0.2f"% state.PM_10_Concentration
 
             if (config.SWDEBUG):
 	            print ("myURL=", myURL)

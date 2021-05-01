@@ -79,6 +79,8 @@ def read_AQI():
                     return 0
 
       myAQI = hm3301.get_aqi()
+      myPM2_5Concentration = hm3301.get_pm2_5()
+      myPM10Concentration = hm3301.get_pm10()
       if (config.SWDEBUG):
         hm3301.print_data()
         print ("AQI=", myAQI)
@@ -86,6 +88,8 @@ def read_AQI():
       #hm3301.close()
       powerOffDustSensor()
       state.AQI = myAQI
+      state.PM_2_5_Concentration = myPM2_5Concentration
+      state.PM_10_Concentration = myPM10Concentration
       
 def print_data():
     hm3301.print_data()
@@ -94,6 +98,13 @@ def get_aqi():
       myAQI = hm3301.get_aqi()
       return myAQI
 
+def get_pm2_5_concentration():
+    myPM2_5Concentration = hm3301.get_pm2_5()
+    return myPM2_5Concentration
+
+def get_pm10_concentration():
+    myPM10Concentration = hm3301.get_pm10()
+    return myPM10Concentration
 
 def get_data():
       myData = hm3301.get_data()
