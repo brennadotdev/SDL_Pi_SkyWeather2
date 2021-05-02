@@ -111,7 +111,7 @@ class SDL_Pi_HM3301(object):
         return str(myaqi)
     
     def get_pm2_5(self):
-        return self.PM_2_5_conctrt_std
+        return self.PM_2_5_conctrt_atmosph
     
     def get_pm10(self):
-        return self.PM_10_conctrt_std
+        return self.PM_10_conctrt_atmosph
