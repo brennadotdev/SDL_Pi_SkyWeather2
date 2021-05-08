@@ -718,7 +718,7 @@ class SkyWeatherConfigure(App):
     def buildScreen4(self):
         #screen 4
 
-        vbox = VBox(width=600, height=510, style="background: LightGray; border: 5px solid red")
+        vbox = VBox(width=600, height=600, style="background: LightGray; border: 5px solid red")
 
         vbox.style['justify-content'] = 'flex-start'
         vbox.style['align-items'] = 'flex-start'
