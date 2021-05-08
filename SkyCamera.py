@@ -146,6 +146,7 @@ def enhanceSkyPictureWeatherSTEM(image, image_h):
     image.save('static/skycameraprocessed.jpg', format='JPEG')
 
 def enhanceSkyPictureWeatherUnderground(image):
+    image = image.resize((1280, 720))
     image.save(WEATHERUNDERGROUND_IMAGE_FILE_NAME, format='JPEG')
 
 import base64
