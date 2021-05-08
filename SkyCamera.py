@@ -57,8 +57,6 @@ def takeSkyPicture():
             print("SkyCam Picture Taken")
             print("--------------------")
 
-        enhanceSkyPicture()
-
         time.sleep(2)
 
     except:
