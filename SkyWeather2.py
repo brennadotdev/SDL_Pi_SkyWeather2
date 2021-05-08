@@ -352,9 +352,9 @@ scheduler.add_job(pclogging.writeITWeatherRecord, 'interval', seconds=15*60)
 
 
 # sky camera
-if (config.USEWEATHERSTEM):
+if (config.USEWEATHERSTEM or config.WeatherUnderground_Camera_Present):
     if (config.Camera_Present):
-        scheduler.add_job(SkyCamera.takeSkyPicture, 'interval', seconds=config.INTERVAL_CAM_PICS__SECONDS) 
+        scheduler.add_job(SkyCamera.useSkyCamera, 'interval', seconds=config.INTERVAL_CAM_PICS__SECONDS)
 
 
 # start scheduler
