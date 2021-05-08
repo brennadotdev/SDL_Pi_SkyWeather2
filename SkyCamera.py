@@ -14,6 +14,8 @@ import datetime as dt
 
 import config
 
+CORNER_IMAGE_SIZE = 64
+
 
 def SkyWeatherKeyGeneration(userKey):
     catkey = "AZWqNqDMhvK8Lhbb2jtk1bucj0s2lqZ6" + userKey
@@ -108,21 +110,25 @@ def enhanceSkyPicture():
 
     pil_im.paste(button_img, (0, 0))
     bg_w, bg_h = pil_im.size
-    # WeatherSTEM logo in lower left
-    size = 64
-    WSLimg = Image.open("static/WeatherSTEMLogoSkyBackground.png")
-    WSLimg.thumbnail((size, size), Image.ANTIALIAS)
-    pil_im.paste(WSLimg, (0, bg_h - size))
 
     # SkyWeather log in lower right
     SWLimg = Image.open("static/SkyWeatherLogoSymbol.png")
-    SWLimg.thumbnail((size, size), Image.ANTIALIAS)
-    pil_im.paste(SWLimg, (bg_w - size, bg_h - size))
+    SWLimg.thumbnail((CORNER_IMAGE_SIZE, CORNER_IMAGE_SIZE), Image.ANTIALIAS)
+    pil_im.paste(SWLimg, (bg_w - CORNER_IMAGE_SIZE, bg_h - CORNER_IMAGE_SIZE))
+
+    enhanceSkyPictureWeatherSTEM(pil_im, bg_h)
 
     # Save the image
     pil_im.save('dash_app/assets/skycamera.jpg', format='JPEG')
     pil_im.save('static/skycamera.jpg', format='JPEG')
     pil_im.save('static/skycameraprocessed.jpg', format='JPEG')
+
+
+def enhanceSkyPictureWeatherSTEM(image, image_h):
+    # WeatherSTEM logo in lower left
+    WSLimg = Image.open("static/WeatherSTEMLogoSkyBackground.png")
+    WSLimg.thumbnail((CORNER_IMAGE_SIZE, CORNER_IMAGE_SIZE), Image.ANTIALIAS)
+    image.paste(WSLimg, (0, image_h - CORNER_IMAGE_SIZE))
 
 
 import base64
