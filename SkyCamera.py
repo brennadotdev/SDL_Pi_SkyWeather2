@@ -39,7 +39,7 @@ def useSkyCamera():
 def takeSkyPicture():
     if (config.SWDEBUG):
         print("--------------------")
-        print("SkyCam Picture Taken")
+        print("Taking SkyCam Picture")
         print("--------------------")
     camera = picamera.PiCamera()
 
@@ -52,6 +52,10 @@ def takeSkyPicture():
         time.sleep(2)
 
         camera.capture('static/skycamera.jpg')
+        if (config.SWDEBUG):
+            print("--------------------")
+            print("SkyCam Picture Taken")
+            print("--------------------")
 
         enhanceSkyPicture()
 
