@@ -248,6 +248,9 @@ class SkyWeatherConfigure(App):
         self.WeatherUnderground_Present = False
         self.WeatherUnderground_StationID = "KWXXXXX"
         self.WeatherUnderground_StationKey = "YYYYYY"
+        self.WeatherUnderground_Camera_Present = False
+        self.WeatherUnderground_Camera_DeviceId = "wu-XXXXX"
+        self.WeatherUnderground_Camera_UploadKey = "ZZZZZ"
         self.USEBLYNK = False
         self.BLYNK_AUTH = ""
         self.USEWSLIGHTNING = False
@@ -292,8 +295,11 @@ class SkyWeatherConfigure(App):
         self.dataDefaults['STATIONKEY'] = self.STATIONKEY 
         self.dataDefaults['WeatherUnderground_Present'] = self.WeatherUnderground_Present 
         self.dataDefaults['WeatherUnderground_StationID'] = self.WeatherUnderground_StationID 
-        self.dataDefaults['WeatherUnderground_StationKey'] = self.WeatherUnderground_StationKey 
-        self.dataDefaults['USEBLYNK'] = self.USEBLYNK 
+        self.dataDefaults['WeatherUnderground_StationKey'] = self.WeatherUnderground_StationKey
+        self.dataDefaults['WeatherUnderground_Camera_Present'] = self.WeatherUnderground_Camera_Present
+        self.dataDefaults['WeatherUnderground_Camera_DeviceId'] = self.WeatherUnderground_Camera_DeviceId
+        self.dataDefaults['WeatherUnderground_Camera_UploadKey'] = self.WeatherUnderground_Camera_UploadKey
+        self.dataDefaults['USEBLYNK'] = self.USEBLYNK
         self.dataDefaults['USEWSLIGHTNING'] = self.USEWSLIGHTNING 
         self.dataDefaults['USEWSAQI'] = self.USEWSAQI 
         self.dataDefaults['USEWSSKYCAM'] = self.USEWSSKYCAM 
@@ -355,6 +361,9 @@ class SkyWeatherConfigure(App):
                 self.WeatherUnderground_Present = self.getJSONValue('WeatherUnderground_Present')
                 self.WeatherUnderground_StationID = self.getJSONValue('WeatherUnderground_StationID')
                 self.WeatherUnderground_StationKey = self.getJSONValue('WeatherUnderground_StationKey')
+                self.WeatherUnderground_Camera_Present = self.getJSONValue('WeatherUnderground_Camera_Present')
+                self.WeatherUnderground_Camera_DeviceId = self.getJSONValue('WeatherUnderground_Camera_DeviceId')
+                self.WeatherUnderground_Camera_UploadKey = self.getJSONValue('WeatherUnderground_Camera_UploadKey')
                 self.USEBLYNK = self.getJSONValue('USEBLYNK')
                 self.BLYNK_AUTH = self.getJSONValue('BLYNK_AUTH')
                 self.USEWSLIGHTNING = self.getJSONValue('USEWSLIGHTNING')
@@ -413,6 +422,9 @@ class SkyWeatherConfigure(App):
         data['WeatherUnderground_Present'] = self.F_WeatherUnderground_Present.get_value()
         data['WeatherUnderground_StationID'] = self.F_WeatherUnderground_StationID.get_value()
         data['WeatherUnderground_StationKey'] = self.F_WeatherUnderground_StationKey.get_value()
+        data['WeatherUnderground_Camera_Present'] = self.F_WeatherUnderground_Camera_Present.get_value()
+        data['WeatherUnderground_Camera_DeviceId'] = self.F_WeatherUnderground_Camera_DeviceId.get_value()
+        data['WeatherUnderground_Camera_UploadKey'] = self.F_WeatherUnderground_Camera_UploadKey.get_value()
         data['USEBLYNK'] = self.F_USEBLYNK.get_value()
         data['BLYNK_AUTH'] = self.F_BLYNK_AUTH.get_value()
         data['USEWSLIGHTNING'] = self.F_USEWSLIGHTNING.get_value()
@@ -785,7 +797,24 @@ class SkyWeatherConfigure(App):
         
         self.F_WeatherUnderground_StationKey = gui.TextInput(width=300, height=30, style="margin:5px")
         self.F_WeatherUnderground_StationKey.set_value(self.WeatherUnderground_StationKey)
-        vbox.append(self.F_WeatherUnderground_StationKey,'WeatherUnderground_StationKey') 
+        vbox.append(self.F_WeatherUnderground_StationKey,'WeatherUnderground_StationKey')
+
+        self.F_WeatherUnderground_Camera_Present = gui.CheckBoxLabel('Enable WeatherUnderground Camera', self.WeatherUnderground_Camera_Present, height=30, style='margin:5px; background: LightGray ')
+        vbox.append(self.F_WeatherUnderground_Camera_Present, 'self.F_WeatherUnderground_Camera_Present')
+
+        p9label = gui.Label("Device ID", style='position:absolute; left:5px; top:40px;' + self.labelstyle)
+        vbox.append(p9label, 'p9label')
+
+        self.F_WeatherUnderground_Camera_DeviceId = gui.TextInput(width=300, height=30, style="margin:5px")
+        self.F_WeatherUnderground_Camera_DeviceId.set_value(self.WeatherUnderground_Camera_DeviceId)
+        vbox.append(self.F_WeatherUnderground_Camera_DeviceId, 'WeatherUnderground_Camera_DeviceId')
+
+        p10label = gui.Label("Upload Key", style='position:absolute; left:5px; top:40px;' + self.labelstyle)
+        vbox.append(p10label, 'p10label')
+
+        self.F_WeatherUnderground_Camera_UploadKey = gui.TextInput(width=300, height=30, style="margin:5px")
+        self.F_WeatherUnderground_Camera_UploadKey.set_value(self.WeatherUnderground_Camera_UploadKey)
+        vbox.append(self.F_WeatherUnderground_Camera_UploadKey, 'WeatherUnderground_Camera_UploadKey')
 
         return vbox
 
