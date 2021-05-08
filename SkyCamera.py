@@ -11,7 +11,7 @@ from PIL import ImageFont, ImageDraw, Image
 import traceback
 import util
 import datetime as dt
-from ftplib import FTP
+from ftplib import FTP, all_errors as ftp_errors
 
 import config
 
@@ -419,7 +419,20 @@ def sendWeatherUnderground():
         print("--------------------")
         print("SkyCam Package Sending to WeatherUnderground")
         print("--------------------")
-    with open(WEATHERUNDERGROUND_IMAGE_FILE_NAME, 'rb') as file:
-        with FTP("webcam.wunderground.com", user=config.WeatherUnderground_Camera_DeviceId, passwd=config.WeatherUnderground_Camera_UploadKey) as ftp:
-            ftp.cwd('/')
-            ftp.storbinary('STOR image.jpg', file)
+    try:
+        with open(WEATHERUNDERGROUND_IMAGE_FILE_NAME, 'rb') as file:
+            with FTP("webcam.wunderground.com", user=config.WeatherUnderground_Camera_DeviceId, passwd=config.WeatherUnderground_Camera_UploadKey) as ftp:
+                ftp.cwd('/')
+                ftp.storbinary('STOR image.jpg', file)
+    except ftp_errors as e:
+        if (config.SWDEBUG):
+            print(traceback.format_exc())
+            print("--------------------")
+            print("FTP Error Sending SkyCamera data to WeatherUnderground: ", e)
+            print("--------------------")
+    except IOError:
+        if (config.SWDEBUG):
+            print(traceback.format_exc())
+            print("--------------------")
+            print("IOError Sending reading WeatherUnderground image file")
+            print("--------------------")
