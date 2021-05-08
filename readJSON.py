@@ -24,6 +24,9 @@ def setDefaults():
         config.WeatherUnderground_Present = False
         config.WeatherUnderground_StationID = "KWXXXXX"
         config.WeatherUnderground_StationKey = "YYYYYY"
+        config.WeatherUnderground_Camera_Present = False
+        config.WeatherUnderground_Camera_DeviceId = "wu-XXXXX"
+        config.WeatherUnderground_Camera_UploadKey = "ZZZZZ"
         config.USEBLYNK = False
         config.BLYNK_AUTH = ""
         config.USEWSLIGHTNING = False
@@ -87,6 +90,9 @@ def readJSON(addPath):
                 config.WeatherUnderground_Present = getJSONValue('WeatherUnderground_Present')
                 config.WeatherUnderground_StationID = getJSONValue('WeatherUnderground_StationID')
                 config.WeatherUnderground_StationKey = getJSONValue('WeatherUnderground_StationKey')
+                config.WeatherUnderground_Camera_Present = getJSONValue('WeatherUnderground_Camera_Present')
+                config.WeatherUnderground_Camera_DeviceId = getJSONValue('WeatherUnderground_Camera_DeviceId')
+                config.WeatherUnderground_Camera_UploadKey = getJSONValue('WeatherUnderground_Camera_UploadKey')
                 config.USEBLYNK = getJSONValue('USEBLYNK')
                 config.BLYNK_AUTH = getJSONValue('BLYNK_AUTH')
                 config.USEWSLIGHTNING = getJSONValue('USEWSLIGHTNING')
