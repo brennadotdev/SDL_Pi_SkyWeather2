@@ -122,15 +122,10 @@ def enhanceSkyPicture():
     pil_im.paste(SWLimg, (bg_w - CORNER_IMAGE_SIZE, bg_h - CORNER_IMAGE_SIZE))
 
     if (config.USEWEATHERSTEM):
-        enhanceSkyPictureWeatherSTEM(pil_im, bg_h)
+        enhanceSkyPictureWeatherSTEM(pil_im.copy(), bg_h)
 
     if (config.WeatherUnderground_Camera_Present):
-        enhanceSkyPictureWeatherUnderground(pil_im)
-
-    # Save the image
-    pil_im.save('dash_app/assets/skycamera.jpg', format='JPEG')
-    pil_im.save('static/skycamera.jpg', format='JPEG')
-    pil_im.save('static/skycameraprocessed.jpg', format='JPEG')
+        enhanceSkyPictureWeatherUnderground(pil_im.copy())
 
     pil_im.close()
 
@@ -139,6 +134,11 @@ def enhanceSkyPictureWeatherSTEM(image, image_h):
     WSLimg = Image.open("static/WeatherSTEMLogoSkyBackground.png")
     WSLimg.thumbnail((CORNER_IMAGE_SIZE, CORNER_IMAGE_SIZE), Image.ANTIALIAS)
     image.paste(WSLimg, (0, image_h - CORNER_IMAGE_SIZE))
+
+    # Save the image
+    image.save('dash_app/assets/skycamera.jpg', format='JPEG')
+    image.save('static/skycamera.jpg', format='JPEG')
+    image.save('static/skycameraprocessed.jpg', format='JPEG')
 
 def enhanceSkyPictureWeatherUnderground(image):
     image.save('static/skycameraprocessed_wu.jpg', format='JPEG')
