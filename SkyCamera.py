@@ -40,63 +40,7 @@ def takeSkyPicture():
 
         camera.capture('static/skycamera.jpg')
 
-        # now add timestamp to jpeg
-        pil_im = Image.open('static/skycamera.jpg')
-
-        draw = ImageDraw.Draw(pil_im)
-
-        # Choose a font
-        font = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeSans.ttf", 25)
-
-        # set up units
-        # wind
-        val = util.returnWindSpeed(state.WindSpeed)
-        WindStval = "{0:0.1f}".format(val) + util.returnWindSpeedUnit()
-        val = util.returnWindSpeed(state.WindGust)
-        WindGtval = "{0:0.1f}".format(val) + util.returnWindSpeedUnit()
-        val = util.returnTemperatureCF(state.OutdoorTemperature)
-        OTtval = "{0:0.1f} ".format(val) + util.returnTemperatureCFUnit()
-
-        myText = "SkyWeather2 V%s %s Wind Speed: %s Wind Gust: %s Temp: %s " % (
-        config.SWVERSION, dt.datetime.now().strftime('%d-%b-%Y %H:%M:%S'), WindStval, WindGtval, OTtval)
-        print("mySkyCameraText=", myText)
-
-        # Draw the text
-        color = 'rgb(255,255,255)'
-        # draw.text((0, 0), myText,fill = color, font=font)
-
-        # get text size
-        text_size = font.getsize(myText)
-
-        # set button size + 10px margins
-        button_size = (text_size[0] + 20, text_size[1] + 10)
-
-        # create image with correct size and black background
-        button_img = Image.new('RGBA', button_size, "black")
-
-        # put text on button with 10px margins
-        button_draw = ImageDraw.Draw(button_img)
-        button_draw.text((10, 5), myText, fill=color, font=font)
-
-        # put button on source image in position (0, 0)
-
-        pil_im.paste(button_img, (0, 0))
-        bg_w, bg_h = pil_im.size
-        # WeatherSTEM logo in lower left
-        size = 64
-        WSLimg = Image.open("static/WeatherSTEMLogoSkyBackground.png")
-        WSLimg.thumbnail((size, size), Image.ANTIALIAS)
-        pil_im.paste(WSLimg, (0, bg_h - size))
-
-        # SkyWeather log in lower right
-        SWLimg = Image.open("static/SkyWeatherLogoSymbol.png")
-        SWLimg.thumbnail((size, size), Image.ANTIALIAS)
-        pil_im.paste(SWLimg, (bg_w - size, bg_h - size))
-
-        # Save the image
-        pil_im.save('dash_app/assets/skycamera.jpg', format='JPEG')
-        pil_im.save('static/skycamera.jpg', format='JPEG')
-        pil_im.save('static/skycameraprocessed.jpg', format='JPEG')
+        enhanceSkyPicture()
 
         time.sleep(2)
 
@@ -119,6 +63,66 @@ def takeSkyPicture():
 
     if (config.USEWEATHERSTEM == True):
         sendSkyWeather()
+
+
+def enhanceSkyPicture():
+    # now add timestamp to jpeg
+    pil_im = Image.open('static/skycamera.jpg')
+
+    draw = ImageDraw.Draw(pil_im)
+
+    # Choose a font
+    font = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeSans.ttf", 25)
+
+    # set up units
+    # wind
+    val = util.returnWindSpeed(state.WindSpeed)
+    WindStval = "{0:0.1f}".format(val) + util.returnWindSpeedUnit()
+    val = util.returnWindSpeed(state.WindGust)
+    WindGtval = "{0:0.1f}".format(val) + util.returnWindSpeedUnit()
+    val = util.returnTemperatureCF(state.OutdoorTemperature)
+    OTtval = "{0:0.1f} ".format(val) + util.returnTemperatureCFUnit()
+
+    myText = "SkyWeather2 V%s %s Wind Speed: %s Wind Gust: %s Temp: %s " % (
+        config.SWVERSION, dt.datetime.now().strftime('%d-%b-%Y %H:%M:%S'), WindStval, WindGtval, OTtval)
+    print("mySkyCameraText=", myText)
+
+    # Draw the text
+    color = 'rgb(255,255,255)'
+    # draw.text((0, 0), myText,fill = color, font=font)
+
+    # get text size
+    text_size = font.getsize(myText)
+
+    # set button size + 10px margins
+    button_size = (text_size[0] + 20, text_size[1] + 10)
+
+    # create image with correct size and black background
+    button_img = Image.new('RGBA', button_size, "black")
+
+    # put text on button with 10px margins
+    button_draw = ImageDraw.Draw(button_img)
+    button_draw.text((10, 5), myText, fill=color, font=font)
+
+    # put button on source image in position (0, 0)
+
+    pil_im.paste(button_img, (0, 0))
+    bg_w, bg_h = pil_im.size
+    # WeatherSTEM logo in lower left
+    size = 64
+    WSLimg = Image.open("static/WeatherSTEMLogoSkyBackground.png")
+    WSLimg.thumbnail((size, size), Image.ANTIALIAS)
+    pil_im.paste(WSLimg, (0, bg_h - size))
+
+    # SkyWeather log in lower right
+    SWLimg = Image.open("static/SkyWeatherLogoSymbol.png")
+    SWLimg.thumbnail((size, size), Image.ANTIALIAS)
+    pil_im.paste(SWLimg, (bg_w - size, bg_h - size))
+
+    # Save the image
+    pil_im.save('dash_app/assets/skycamera.jpg', format='JPEG')
+    pil_im.save('static/skycamera.jpg', format='JPEG')
+    pil_im.save('static/skycameraprocessed.jpg', format='JPEG')
 
 
 import base64
