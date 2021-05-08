@@ -78,9 +78,6 @@ def takeSkyPicture():
                 print("SkyCam Close Failed ")
                 print("--------------------")
 
-    if (config.USEWEATHERSTEM == True):
-        sendSkyWeather()
-
 
 def enhanceSkyPicture():
     # now add timestamp to jpeg
