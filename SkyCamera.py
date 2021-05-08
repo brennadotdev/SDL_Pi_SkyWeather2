@@ -25,6 +25,11 @@ def SkyWeatherKeyGeneration(userKey):
     return md5result.hexdigest()
 
 
+def useSkyCamera():
+    takeSkyPicture()
+    enhanceSkyPicture()
+    sendSkyWeather()
+
 def takeSkyPicture():
     if (config.SWDEBUG):
         print("--------------------")
@@ -116,13 +121,18 @@ def enhanceSkyPicture():
     SWLimg.thumbnail((CORNER_IMAGE_SIZE, CORNER_IMAGE_SIZE), Image.ANTIALIAS)
     pil_im.paste(SWLimg, (bg_w - CORNER_IMAGE_SIZE, bg_h - CORNER_IMAGE_SIZE))
 
-    enhanceSkyPictureWeatherSTEM(pil_im, bg_h)
+    if (config.USEWEATHERSTEM):
+        enhanceSkyPictureWeatherSTEM(pil_im, bg_h)
+
+    if (config.WeatherUnderground_Camera_Present):
+        enhanceSkyPictureWeatherUnderground(pil_im)
 
     # Save the image
     pil_im.save('dash_app/assets/skycamera.jpg', format='JPEG')
     pil_im.save('static/skycamera.jpg', format='JPEG')
     pil_im.save('static/skycameraprocessed.jpg', format='JPEG')
 
+    pil_im.close()
 
 def enhanceSkyPictureWeatherSTEM(image, image_h):
     # WeatherSTEM logo in lower left
@@ -130,6 +140,8 @@ def enhanceSkyPictureWeatherSTEM(image, image_h):
     WSLimg.thumbnail((CORNER_IMAGE_SIZE, CORNER_IMAGE_SIZE), Image.ANTIALIAS)
     image.paste(WSLimg, (0, image_h - CORNER_IMAGE_SIZE))
 
+def enhanceSkyPictureWeatherUnderground(image):
+    image.save('static/skycameraprocessed_wu.jpg', format='JPEG')
 
 import base64
 
