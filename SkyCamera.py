@@ -11,10 +11,12 @@ from PIL import ImageFont, ImageDraw, Image
 import traceback
 import util
 import datetime as dt
+from ftplib import FTP
 
 import config
 
 CORNER_IMAGE_SIZE = 64
+WEATHERUNDERGROUND_IMAGE_FILE_NAME = 'static/skycameraprocessed_wu.jpg'
 
 
 def SkyWeatherKeyGeneration(userKey):
@@ -28,7 +30,11 @@ def SkyWeatherKeyGeneration(userKey):
 def useSkyCamera():
     takeSkyPicture()
     enhanceSkyPicture()
-    sendSkyWeather()
+    if config.USEWEATHERSTEM:
+        sendSkyWeather()
+    if config.WeatherUnderground_Camera_Present:
+        sendWeatherUnderground()
+
 
 def takeSkyPicture():
     if (config.SWDEBUG):
@@ -141,7 +147,7 @@ def enhanceSkyPictureWeatherSTEM(image, image_h):
     image.save('static/skycameraprocessed.jpg', format='JPEG')
 
 def enhanceSkyPictureWeatherUnderground(image):
-    image.save('static/skycameraprocessed_wu.jpg', format='JPEG')
+    image.save(WEATHERUNDERGROUND_IMAGE_FILE_NAME, format='JPEG')
 
 import base64
 
@@ -156,7 +162,7 @@ def sendSkyWeather():
 
     if (config.SWDEBUG):
         print("--------------------")
-        print("SkyCam Package Sending")
+        print("SkyCam Package Sending to WeatherSTEM")
         print("--------------------")
         print("API Key:", state.WeatherSTEMHash)
     if (state.barometricTrend == True):
@@ -403,3 +409,13 @@ def sendSkyWeather():
     pastebin_url = r.text
     if (config.SWDEBUG):
         print("The pastebin URL is (r.text):%s" % pastebin_url)
+
+def sendWeatherUnderground():
+    if (config.SWDEBUG):
+        print("--------------------")
+        print("SkyCam Package Sending to WeatherUnderground")
+        print("--------------------")
+    with open(WEATHERUNDERGROUND_IMAGE_FILE_NAME, 'rb') as file:
+        with FTP("webcam.wunderground.com", user=config.WeatherUnderground_Camera_DeviceId, passwd=config.WeatherUnderground_Camera_UploadKey) as ftp:
+            ftp.cwd('/')
+            ftp.storbinary('STOR image.jpg', file)
