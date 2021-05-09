@@ -423,19 +423,7 @@ class SkyWeatherConfigure(App):
 
     # screen builds
 
-    def buildScreen1(self):
-
-        # screen 1
-
-        vbox = VBox(width=600, height=510, style="background: LightGray")
-
-        vbox.style['justify-content'] = 'flex-start'
-        vbox.style['align-items'] = 'flex-start'
-        vbox.style['border'] = '2px'
-        vbox.style['border-color'] = 'blue'
-
-        # screen 1
-
+    def buildmenubar(self):
         menu = gui.Menu(width='100%', height='30px')
         m1 = gui.MenuItem('DMW', width=70, height=30)
         m1.onclick.do(self.menu_screen1_clicked)
@@ -458,13 +446,27 @@ class SkyWeatherConfigure(App):
 
         menubar = gui.MenuBar(width='100%', height='30px')
         menubar.append(menu)
-        vbox.append(menubar)
+        return menubar
 
-        screen1header = gui.Label("Debug / MySQL / WLAN Tab", style='margin:10px; background: LightGray')
+    def buildvbox(self, header):
+        vbox = VBox(width=600, height=510, style="background: LightGray; border: 5px solid red")
+
+        vbox.style['justify-content'] = 'flex-start'
+        vbox.style['align-items'] = 'flex-start'
+        vbox.style['border'] = '2px'
+        vbox.style['border-color'] = 'blue'
+
+        vbox.append(self.menubar)
+
+        screen1header = gui.Label(header, style='margin:10px; background: LightGray')
         vbox.append(screen1header)
+        return vbox
+
+    def buildScreen1(self):
+        # screen 1
+        vbox = self.buildvbox("Debug / MySQL / WLAN Tab")
 
         # debug config
-
         debugheader = gui.Label("Debug Configuration",
                                 style='position:absolute; left:5px; top:30px; ' + self.headerstyle)
         vbox.append(debugheader, 'debugheader')
@@ -513,49 +515,8 @@ class SkyWeatherConfigure(App):
         return vbox
 
     def buildScreen2(self):
-
         # screen 2
-
-        vbox = VBox(width=600, height=510, style="background: LightGray; border: 5px solid red")
-
-        vbox.style['justify-content'] = 'flex-start'
-        vbox.style['align-items'] = 'flex-start'
-        vbox.style['border'] = '2px'
-        vbox.style['border-color'] = 'blue'
-
-        menu = gui.Menu(width='100%', height='30px')
-        m1 = gui.MenuItem('DMW', width=70, height=30)
-        m1.onclick.do(self.menu_screen1_clicked)
-        m2 = gui.MenuItem('MTN', width=70, height=30)
-        m2.onclick.do(self.menu_screen2_clicked)
-        m3 = gui.MenuItem('PSMax', width=70, height=30)
-        m3.onclick.do(self.menu_screen3_clicked)
-        m4 = gui.MenuItem('WS-WU', width=70, height=30)
-        m4.onclick.do(self.menu_screen4_clicked)
-        m5 = gui.MenuItem('B-WS', width=70, height=30)
-        m5.onclick.do(self.menu_screen5_clicked)
-        m6 = gui.MenuItem('Pins', width=70, height=30)
-        m6.onclick.do(self.menu_screen6_clicked)
-        m7 = gui.MenuItem('MQTTR', width=70, height=30)
-        m7.onclick.do(self.menu_screen7_clicked)
-        m8 = gui.MenuItem('Camera', width=70, height=30)
-        m8.onclick.do(self.menu_screen8_clicked)
-
-        menu.append([m1, m2, m3, m4, m5, m6, m7, m8])
-
-        menubar = gui.MenuBar(width='100%', height='30px')
-        menubar.append(menu)
-
-        vbox.append(menubar)
-
-        # screen
-        screenheader = gui.Label("Main and Text Notification Tab", style='margin:10px')
-        vbox.append(screenheader)
-
-        # mail and text notifications
-        MTheader = gui.Label("Mail and Text Notification Configuration",
-                             style='position:absolute; left:5px; top:30px;' + self.headerstyle)
-        vbox.append(MTheader, 'MTheader')
+        vbox = self.buildvbox("Main and Text Notification Tab")
 
         plabel = gui.Label("Mail User", style='position:absolute; left:5px; top:40px;' + self.labelstyle)
         vbox.append(plabel, 'plabel')
@@ -599,44 +560,8 @@ class SkyWeatherConfigure(App):
         return vbox
 
     def buildScreen3(self):
-
         # screen 3
-
-        vbox = VBox(width=600, height=510, style="background: LightGray; border: 5px solid red")
-
-        vbox.style['justify-content'] = 'flex-start'
-        vbox.style['align-items'] = 'flex-start'
-        vbox.style['border'] = '2px'
-        vbox.style['border-color'] = 'blue'
-
-        menu = gui.Menu(width='100%', height='30px')
-        m1 = gui.MenuItem('DMW', width=70, height=30)
-        m1.onclick.do(self.menu_screen1_clicked)
-        m2 = gui.MenuItem('MTN', width=70, height=30)
-        m2.onclick.do(self.menu_screen2_clicked)
-        m3 = gui.MenuItem('PSMax', width=70, height=30)
-        m3.onclick.do(self.menu_screen3_clicked)
-        m4 = gui.MenuItem('WS-WU', width=70, height=30)
-        m4.onclick.do(self.menu_screen4_clicked)
-        m5 = gui.MenuItem('B-WS', width=70, height=30)
-        m5.onclick.do(self.menu_screen5_clicked)
-        m6 = gui.MenuItem('Pins', width=70, height=30)
-        m6.onclick.do(self.menu_screen6_clicked)
-        m7 = gui.MenuItem('MQTTR', width=70, height=30)
-        m7.onclick.do(self.menu_screen7_clicked)
-        m8 = gui.MenuItem('Camera', width=70, height=30)
-        m8.onclick.do(self.menu_screen8_clicked)
-
-        menu.append([m1, m2, m3, m4, m5, m6, m7, m8])
-
-        menubar = gui.MenuBar(width='100%', height='30px')
-        menubar.append(menu)
-
-        vbox.append(menubar)
-
-        # screen 1
-        screen1header = gui.Label("Pixel / NeoPixel / SolarMAX Configuration Tab", style='margin:10px')
-        vbox.append(screen1header)
+        vbox = self.buildvbox("Pixel / NeoPixel / SolarMAX Configuration Tab")
 
         PNheader = gui.Label("Pixel/NeoPixel LED Support",
                              style='position:absolute; left:5px; top:30px;' + self.headerstyle)
@@ -682,42 +607,7 @@ class SkyWeatherConfigure(App):
 
     def buildScreen4(self):
         # screen 4
-
-        vbox = VBox(width=600, height=510, style="background: LightGray; border: 5px solid red")
-
-        vbox.style['justify-content'] = 'flex-start'
-        vbox.style['align-items'] = 'flex-start'
-        vbox.style['border'] = '2px'
-        vbox.style['border-color'] = 'blue'
-
-        menu = gui.Menu(width='100%', height='30px')
-        m1 = gui.MenuItem('DMW', width=70, height=30)
-        m1.onclick.do(self.menu_screen1_clicked)
-        m2 = gui.MenuItem('MTN', width=70, height=30)
-        m2.onclick.do(self.menu_screen2_clicked)
-        m3 = gui.MenuItem('PSMax', width=70, height=30)
-        m3.onclick.do(self.menu_screen3_clicked)
-        m4 = gui.MenuItem('WS-WU', width=70, height=30)
-        m4.onclick.do(self.menu_screen4_clicked)
-        m5 = gui.MenuItem('B-WS', width=70, height=30)
-        m5.onclick.do(self.menu_screen5_clicked)
-        m6 = gui.MenuItem('Pins', width=70, height=30)
-        m6.onclick.do(self.menu_screen6_clicked)
-        m7 = gui.MenuItem('MQTTR', width=70, height=30)
-        m7.onclick.do(self.menu_screen7_clicked)
-        m8 = gui.MenuItem('Camera', width=70, height=30)
-        m8.onclick.do(self.menu_screen8_clicked)
-
-        menu.append([m1, m2, m3, m4, m5, m6, m7, m8])
-
-        menubar = gui.MenuBar(width='100%', height='30px')
-        menubar.append(menu)
-
-        vbox.append(menubar)
-
-        # screen
-        screen1header = gui.Label("WeatherSTEM / WeatherUnderGround Configuration Tab", style='margin:10px')
-        vbox.append(screen1header)
+        vbox = self.buildvbox("WeatherSTEM / WeatherUnderGround Configuration Tab")
 
         P3Nheader = gui.Label("WeatherSTEM Configuration",
                               style='position:absolute; left:5px; top:30px;' + self.headerstyle)
@@ -771,42 +661,7 @@ class SkyWeatherConfigure(App):
 
     def buildScreen5(self):
         # screen 5
-
-        vbox = VBox(width=600, height=510, style="background: LightGray; border: 5px solid red")
-
-        vbox.style['justify-content'] = 'flex-start'
-        vbox.style['align-items'] = 'flex-start'
-        vbox.style['border'] = '2px'
-        vbox.style['border-color'] = 'blue'
-
-        menu = gui.Menu(width='100%', height='30px')
-        m1 = gui.MenuItem('DMW', width=70, height=30)
-        m1.onclick.do(self.menu_screen1_clicked)
-        m2 = gui.MenuItem('MTN', width=70, height=30)
-        m2.onclick.do(self.menu_screen2_clicked)
-        m3 = gui.MenuItem('PSMax', width=70, height=30)
-        m3.onclick.do(self.menu_screen3_clicked)
-        m4 = gui.MenuItem('WS-WU', width=70, height=30)
-        m4.onclick.do(self.menu_screen4_clicked)
-        m5 = gui.MenuItem('B-WS', width=70, height=30)
-        m5.onclick.do(self.menu_screen5_clicked)
-        m6 = gui.MenuItem('Pins', width=70, height=30)
-        m6.onclick.do(self.menu_screen6_clicked)
-        m7 = gui.MenuItem('MQTTR', width=70, height=30)
-        m7.onclick.do(self.menu_screen7_clicked)
-        m8 = gui.MenuItem('Camera', width=70, height=30)
-        m8.onclick.do(self.menu_screen8_clicked)
-
-        menu.append([m1, m2, m3, m4, m5, m6, m7, m8])
-
-        menubar = gui.MenuBar(width='100%', height='30px')
-        menubar.append(menu)
-
-        vbox.append(menubar)
-
-        # screen 1
-        screen1header = gui.Label("Blynk / WeatherSense Tab", style='margin:10px')
-        vbox.append(screen1header)
+        vbox = self.buildvbox("Blynk / WeatherSense Tab")
 
         P5Nheader = gui.Label("Blynk Configuration", style='position:absolute; left:5px; top:30px;' + self.headerstyle)
         vbox.append(P5Nheader, 'P5Nheader')
@@ -841,42 +696,7 @@ class SkyWeatherConfigure(App):
 
     def buildScreen6(self):
         # screen 6
-
-        vbox = VBox(width=600, height=510, style="background: LightGray; border: 5px solid red")
-
-        vbox.style['justify-content'] = 'flex-start'
-        vbox.style['align-items'] = 'flex-start'
-        vbox.style['border'] = '2px'
-        vbox.style['border-color'] = 'blue'
-
-        menu = gui.Menu(width='100%', height='30px')
-        m1 = gui.MenuItem('DMW', width=70, height=30)
-        m1.onclick.do(self.menu_screen1_clicked)
-        m2 = gui.MenuItem('MTN', width=70, height=30)
-        m2.onclick.do(self.menu_screen2_clicked)
-        m3 = gui.MenuItem('PSMax', width=70, height=30)
-        m3.onclick.do(self.menu_screen3_clicked)
-        m4 = gui.MenuItem('WS-WU', width=70, height=30)
-        m4.onclick.do(self.menu_screen4_clicked)
-        m5 = gui.MenuItem('B-WS', width=70, height=30)
-        m5.onclick.do(self.menu_screen5_clicked)
-        m6 = gui.MenuItem('Pins', width=70, height=30)
-        m6.onclick.do(self.menu_screen6_clicked)
-        m7 = gui.MenuItem('MQTTR', width=70, height=30)
-        m7.onclick.do(self.menu_screen7_clicked)
-        m8 = gui.MenuItem('Camera', width=70, height=30)
-        m8.onclick.do(self.menu_screen8_clicked)
-
-        menu.append([m1, m2, m3, m4, m5, m6, m7, m8])
-
-        menubar = gui.MenuBar(width='100%', height='30px')
-        menubar.append(menu)
-
-        vbox.append(menubar)
-
-        # screen
-        screenheader = gui.Label("Pin Config Tab", style='margin:10px')
-        vbox.append(screenheader)
+        vbox = self.buildvbox("Pin Config Tab")
 
         # short headers
 
@@ -931,45 +751,9 @@ class SkyWeatherConfigure(App):
 
     def buildScreen7(self):
         # screen 7
-
-        vbox = VBox(width=600, height=510, style="background: LightGray; border: 5px solid red")
-
-        vbox.style['justify-content'] = 'flex-start'
-        vbox.style['align-items'] = 'flex-start'
-        vbox.style['border'] = '2px'
-        vbox.style['border-color'] = 'blue'
-
-        menu = gui.Menu(width='100%', height='30px')
-        m1 = gui.MenuItem('DMW', width=70, height=30)
-        m1.onclick.do(self.menu_screen1_clicked)
-        m2 = gui.MenuItem('MTN', width=70, height=30)
-        m2.onclick.do(self.menu_screen2_clicked)
-        m3 = gui.MenuItem('PSMax', width=70, height=30)
-        m3.onclick.do(self.menu_screen3_clicked)
-        m4 = gui.MenuItem('WS-WU', width=70, height=30)
-        m4.onclick.do(self.menu_screen4_clicked)
-        m5 = gui.MenuItem('B-WS', width=70, height=30)
-        m5.onclick.do(self.menu_screen5_clicked)
-        m6 = gui.MenuItem('Pins', width=70, height=30)
-        m6.onclick.do(self.menu_screen6_clicked)
-        m7 = gui.MenuItem('MQTTR', width=70, height=30)
-        m7.onclick.do(self.menu_screen7_clicked)
-        m8 = gui.MenuItem('Camera', width=70, height=30)
-        m8.onclick.do(self.menu_screen8_clicked)
-
-        menu.append([m1, m2, m3, m4, m5, m6, m7, m8])
-
-        menubar = gui.MenuBar(width='100%', height='30px')
-        menubar.append(menu)
-
-        vbox.append(menubar)
-
-        # screen
-        screenheader = gui.Label("MQTT / Rest Tab", style='margin:10px')
-        vbox.append(screenheader)
+        vbox = self.buildvbox("MQTT / Rest Tab")
 
         # short headers
-
         shortlabelstyle = 'font-family:monospace; width:200; font-size:15px; margin:5px; background:LightGray'
 
         P7Nheader = gui.Label("REST Interface", style='position:absolute; left:5px; top:30px;' + self.headerstyle)
@@ -1012,45 +796,9 @@ class SkyWeatherConfigure(App):
 
     def buildScreen8(self):
         # screen 8
-
-        vbox = VBox(width=600, height=510, style="background: LightGray; border: 5px solid red")
-
-        vbox.style['justify-content'] = 'flex-start'
-        vbox.style['align-items'] = 'flex-start'
-        vbox.style['border'] = '2px'
-        vbox.style['border-color'] = 'blue'
-
-        menu = gui.Menu(width='100%', height='30px')
-        m1 = gui.MenuItem('DMW', width=70, height=30)
-        m1.onclick.do(self.menu_screen1_clicked)
-        m2 = gui.MenuItem('MTN', width=70, height=30)
-        m2.onclick.do(self.menu_screen2_clicked)
-        m3 = gui.MenuItem('PSMax', width=70, height=30)
-        m3.onclick.do(self.menu_screen3_clicked)
-        m4 = gui.MenuItem('WS-WU', width=70, height=30)
-        m4.onclick.do(self.menu_screen4_clicked)
-        m5 = gui.MenuItem('B-WS', width=70, height=30)
-        m5.onclick.do(self.menu_screen5_clicked)
-        m6 = gui.MenuItem('Pins', width=70, height=30)
-        m6.onclick.do(self.menu_screen6_clicked)
-        m7 = gui.MenuItem('MQTTR', width=70, height=30)
-        m7.onclick.do(self.menu_screen7_clicked)
-        m8 = gui.MenuItem('Camera', width=70, height=30)
-        m8.onclick.do(self.menu_screen8_clicked)
-
-        menu.append([m1, m2, m3, m4, m5, m6, m7, m8])
-
-        menubar = gui.MenuBar(width='100%', height='30px')
-        menubar.append(menu)
-
-        vbox.append(menubar)
-
-        # screen
-        screenheader = gui.Label("Camera Options", style='margin:10px')
-        vbox.append(screenheader)
+        vbox = self.buildvbox("Camera Options")
 
         # short headers
-
         shortlabelstyle = 'font-family:monospace; width:200; font-size:15px; margin:5px; background:LightGray'
 
         P5Nheader = gui.Label("Night Camera Enable", style='position:absolute; left:5px; top:30px;' + self.headerstyle)
@@ -1136,6 +884,9 @@ class SkyWeatherConfigure(App):
 
         self.headerstyle = 'width:400px; font-family:monospace; font-size:20px; margin:10px; background:LightBlue'
         self.labelstyle = 'font-family:monospace; font-size:15px; margin:5px; background:LightGray'
+
+        # build shared elements
+        self.menubar = self.buildmenubar()
 
         # build screens
 
