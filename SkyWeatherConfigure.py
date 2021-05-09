@@ -1,14 +1,11 @@
-import os
-import time
-import random
-import threading
-import remi.gui as gui
-import urllib.request
-from urllib.request import urlopen
-
-from remi.gui import *
-from remi import start, App
 import json
+import time
+import urllib.request
+
+import remi.gui as gui
+from remi import start, App
+from remi.gui import *
+
 
 class AppURLopener(urllib.request.FancyURLopener):
     version = "Mozilla/5.0"
