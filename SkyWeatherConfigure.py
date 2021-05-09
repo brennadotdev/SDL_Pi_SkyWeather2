@@ -446,7 +446,7 @@ class SkyWeatherConfigure(App):
         vbox.append(headerlabel)
         return vbox
 
-    def buildScreen1(self):
+    def buildScreenDWM(self):
         # screen 1
         vbox = self.buildvbox("Debug / MySQL / WLAN Tab")
 
@@ -498,7 +498,7 @@ class SkyWeatherConfigure(App):
 
         return vbox
 
-    def buildScreen2(self):
+    def buildScreenMTN(self):
         # screen 2
         vbox = self.buildvbox("Main and Text Notification Tab")
 
@@ -543,7 +543,7 @@ class SkyWeatherConfigure(App):
 
         return vbox
 
-    def buildScreen3(self):
+    def buildScreenPSMax(self):
         # screen 3
         vbox = self.buildvbox("Pixel / NeoPixel / SolarMAX Configuration Tab")
 
@@ -589,7 +589,7 @@ class SkyWeatherConfigure(App):
 
         return vbox
 
-    def buildScreen4(self):
+    def buildScreenWSWU(self):
         # screen 4
         vbox = self.buildvbox("WeatherSTEM / WeatherUnderGround Configuration Tab")
 
@@ -643,7 +643,7 @@ class SkyWeatherConfigure(App):
 
         return vbox
 
-    def buildScreen5(self):
+    def buildScreenBWS(self):
         # screen 5
         vbox = self.buildvbox("Blynk / WeatherSense Tab")
 
@@ -678,7 +678,7 @@ class SkyWeatherConfigure(App):
 
         return vbox
 
-    def buildScreen6(self):
+    def buildScreenPins(self):
         # screen 6
         vbox = self.buildvbox("Pin Config Tab")
 
@@ -733,7 +733,7 @@ class SkyWeatherConfigure(App):
 
         return vbox
 
-    def buildScreen7(self):
+    def buildScreenMQTTR(self):
         # screen 7
         vbox = self.buildvbox("MQTT / Rest Tab")
 
@@ -778,7 +778,7 @@ class SkyWeatherConfigure(App):
 
         return vbox
 
-    def buildScreen8(self):
+    def buildScreenCamera(self):
         # screen 8
         vbox = self.buildvbox("Camera Options")
 
@@ -885,14 +885,14 @@ class SkyWeatherConfigure(App):
 
     def setdefaultscreenstate(self):
         self.screens = {
-            'DWM': self.buildScreen1(),
-            'MTN': self.buildScreen2(),
-            'PS-Max': self.buildScreen3(),
-            'WS-WU': self.buildScreen4(),
-            'B-WS': self.buildScreen5(),
-            'Pins': self.buildScreen6(),
-            'MQTTR': self.buildScreen7(),
-            'Camera': self.buildScreen8()
+            'DWM': self.buildScreenDWM(),
+            'MTN': self.buildScreenMTN(),
+            'PS-Max': self.buildScreenPSMax(),
+            'WS-WU': self.buildScreenWSWU(),
+            'B-WS': self.buildScreenBWS(),
+            'Pins': self.buildScreenPins(),
+            'MQTTR': self.buildScreenMQTTR(),
+            'Camera': self.buildScreenCamera()
         }
         if self.selectedscreen:
             self.vboxcontainer.remove_child(self.vboxcontainer.children[self.selectedscreen])
