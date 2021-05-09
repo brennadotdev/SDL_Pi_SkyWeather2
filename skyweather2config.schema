@@ -1,0 +1,243 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema#",
+  "$id": "https://www.switchdoc.com/skyweather2config.schema.json",
+  "title": "SkyWeather2 Configuration",
+  "description": "Used to configure SkyWeather2 services",
+  "type": "object",
+  "properties": {
+    "key": {
+      "description": "A test key maybe?",
+      "type": "string",
+      "default": "value"
+    },
+    "ProgramName": {
+      "description": "The name of the service",
+      "type": "string",
+      "default": "SkyWeather2"
+    },
+    "ConfigVersion": {
+      "description": "The current software version",
+      "type": "integer",
+      "default": 1
+    },
+    "SWDEBUG": {
+      "description": "Enable SW Debugging",
+      "type": "boolean",
+      "default": false
+    },
+    "enable_MySQL_Logging": {
+      "description": "Enable MySQL Logging",
+      "type": "boolean",
+      "default": false
+    },
+    "MySQL_Password": {
+      "description": "MySQL Password",
+      "type": "string",
+      "default": "password"
+    },
+    "enable_WLAN_Detection":  {
+      "description": "Enable WLAN Detection",
+      "type": "boolean",
+      "default": false
+    },
+    "PingableRouterAddress": {
+      "description": "Pingable Router Address",
+      "type": "string",
+      "format": "ip-address",
+      "default": "192.168.1.1"
+    },
+    "mailUser":  {
+      "description": "Mail User",
+      "type": "string",
+      "default": "yourusername"
+    },
+    "mailPassword": {
+      "description": "Mail Password",
+      "type": "string",
+      "default": "yourmailpassword"
+    },
+    "notifyAddress":  {
+      "description": "Notify Address",
+      "type": "string",
+      "format": "email",
+      "default": "you@example.com"
+    },
+    "fromAddress": {
+      "description": "From Address",
+      "type": "string",
+      "format": "email",
+      "default": "from@example.com"
+    },
+    "enableText":  {
+      "description": "Enable Text Messaging?",
+      "type": "boolean",
+      "default": false
+    },
+    "textnotifyAddress": {
+      "description": "Text Notify Address",
+      "type": "string",
+      "default": "yournumber@yourprovider"
+    },
+    "runLEDs":  {
+      "description": "Enable Pixel/NeoPixel",
+      "type": "boolean",
+      "default": false
+    },
+    "SolarMAX_Present": {
+      "description": "SolarMAX Present",
+      "type": "boolean",
+      "default": false
+    },
+    "BMP280_Altitude_Meters":  {
+      "description": "Station Height in Meters",
+      "type": "number",
+      "default": "626.0"
+    },
+    "Sunlight_Gain": {
+      "description": "Sunlight Gain",
+      "type": "string",
+      "enum": [ "Low", "High" ],
+      "default": "High"
+    },
+    "USEWEATHERSTEM":  {
+      "description": "Enable WeatherSTEM",
+      "type": "boolean",
+      "default": false
+    },
+    "INTERVAL_CAM_PICS__SECONDS": {
+      "description": "Interval between pictures (seconds)",
+      "type": "integer",
+      "default": 60
+    },
+    "STATIONKEY":  {
+      "description": "SkyWeather Station Key",
+      "type": "string",
+      "default": ""
+    },
+    "WeatherUnderground_Present": {
+      "description": "Enable WeatherUndergroun",
+      "type": "boolean",
+      "default": false
+    },
+    "WeatherUnderground_StationID":  {
+      "description": "Station ID",
+      "type": "string",
+      "default": "KWXXXXX"
+    },
+    "WeatherUnderground_StationKey": {
+      "description": "Station Key",
+      "type": "string",
+      "default": "YYYYYY"
+    },
+    "USEBLYNK":  {
+      "description": "Enable Blynk",
+      "type": "boolean",
+      "default": false
+    },
+    "BLYNK_AUTH": {
+      "description": "Blynk App Authorization",
+      "type": "string",
+      "default": ""
+    },
+    "USEWSLIGHTNING":  {
+      "description": "Use WS Lightning",
+      "type": "boolean",
+      "default": false
+    },
+    "USEWSAQI": {
+      "description": "Use WS Air Quality",
+      "type": "boolean",
+      "default": false
+    },
+    "USEWSSKYCAM":  {
+      "description": "Use WS Sky Camera",
+      "type": "boolean",
+      "default": false
+    },
+    "ALTWSSKYCAM": {
+      "description": "Alternate SkyCam/WS SkyCamera",
+      "type": "boolean",
+      "default": false
+    },
+    "DustSensorSCL":  {
+      "description": "Dust Sensor SCL Pin",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 40,
+      "default": "20"
+    },
+    "DustSensorSDA": {
+      "description": "Dust Sensor SDA Pin",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 40,
+      "default": "21"
+    },
+    "DustSensorPowerPin":  {
+      "description": "Dust Sensor Power Pin",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 40,
+      "default": "5"
+    },
+    "GPIO_Pin_PowerDrive_Sig1": {
+      "description": "GPIO Fan Power Pin Sig1",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 40,
+      "default": "4"
+    },
+    "GPIO_Pin_PowerDrive_Sig2":  {
+      "description": "GPIO Fan Power Pin Sig2",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 40,
+      "default": "4"
+    },
+    "WATCHDOGTRIGGER": {
+      "description": "WatchDog Trigger Pin",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 40,
+      "default": "6"
+    },
+    "REST_Enable":  {
+      "description": "REST Enable",
+      "type": "boolean",
+      "default": false
+    },
+    "Camera_Night_Enable": {
+      "description": "Night Vision Enable",
+      "type": "boolean",
+      "default": false
+    },
+    "Camera_Rotation":  {
+      "description": "Camera Rotation",
+      "type": "integer",
+      "enum": [ 0, 90, 180, 270 ],
+      "default": "0"
+    },
+    "MQTT_Server_URL": {
+      "description": "MQTT Server URL",
+      "type": "string",
+      "default": "localhost"
+    },
+    "MQTT_Port_Number":  {
+      "description": "MQTT Server Port Number",
+      "type": "integer",
+      "minimum": 0,
+      "default": "1883"
+    },
+    "MQTT_Send_Seconds": {
+      "description": "How Often MQTT Sent in Seconds",
+      "type": "integer",
+      "minimum": 0,
+      "default": "500"
+    },
+    "English_Metric":  {
+      "description": "English (true) or Metric (false)",
+      "type": "boolean",
+      "default": false
+    }
+  }
+}
