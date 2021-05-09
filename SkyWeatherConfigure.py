@@ -442,10 +442,8 @@ class SkyWeatherConfigure(App):
         vbox.style['border'] = '2px'
         vbox.style['border-color'] = 'blue'
 
-        vbox.append(self.menubar)
-
-        screen1header = gui.Label(header, style='margin:10px; background: LightGray')
-        vbox.append(screen1header)
+        headerlabel = gui.Label(header, style='margin:10px; background: LightGray')
+        vbox.append(headerlabel)
         return vbox
 
     def buildScreen1(self):
@@ -873,8 +871,13 @@ class SkyWeatherConfigure(App):
         screenkeys = ['DWM', 'MTN', 'PS-Max', 'WS-WU', 'B-WS', 'Pins', 'MQTTR', 'Camera']
 
         # build shared elements
-        self.menubar = self.buildmenubar(screenkeys)
+        menubar = self.buildmenubar(screenkeys)
+        self.mainContainer.append(menubar)
+        self.vboxcontainer = Container(width=600, height=510)
+        self.mainContainer.append(self.vboxcontainer)
 
+        # configure screens
+        self.selectedscreen = None
         self.setdefaultscreenstate()
 
         # returning the root widget
@@ -891,16 +894,16 @@ class SkyWeatherConfigure(App):
             'MQTTR': self.buildScreen7(),
             'Camera': self.buildScreen8()
         }
-        self.mainContainer.append(self.screens['DWM'], 'screen1')
+        if self.selectedscreen:
+            self.vboxcontainer.remove_child(self.vboxcontainer.children[self.selectedscreen])
+        self.selectedscreen = self.vboxcontainer.append(self.screens['DWM'], 'DWM')
+        print('Setting default screen ', self.selectedscreen)
 
     # listener functions
-    def removeAllScreens(self):
-        for key, screen in self.screens.items():
-            self.mainContainer.remove_child(screen)
-
     def menuitemclicked(self, widget):
-        self.removeAllScreens()
-        self.mainContainer.append(self.screens[widget.text])
+        self.vboxcontainer.remove_child(self.vboxcontainer.children[self.selectedscreen])
+        self.selectedscreen = self.vboxcontainer.append(self.screens[widget.text], widget.text)
+        print ('Selected screen ', self.selectedscreen)
 
     def onCancel(self, widget, name='', surname=''):
         print("onCancel clicked")
@@ -921,7 +924,6 @@ class SkyWeatherConfigure(App):
 
     def onReset(self, widget, name='', surname=''):
         print("Reset clicked")
-        self.removeAllScreens()
         self.setDefaults()
         self.setdefaultscreenstate()
 
