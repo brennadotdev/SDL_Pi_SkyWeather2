@@ -682,49 +682,45 @@ class SkyWeatherConfigure(App):
         # screen 6
         vbox = self.buildvbox("Pin Config Tab")
 
-        # short headers
-
-        shortlabelstyle = 'font-family:monospace; width:200; font-size:15px; margin:5px; background:LightGray'
-
         P5Nheader = gui.Label("Pin Configurations", style='position:absolute; left:5px; top:30px;' + self.headerstyle)
         vbox.append(P5Nheader, 'P5Nheader')
 
-        p8label = gui.Label("Dust Sensor SCL Pin", style='position:absolute; left:5px; top:40px;' + shortlabelstyle)
+        p8label = gui.Label("Dust Sensor SCL Pin", style='position:absolute; left:5px; top:40px;' + self.shortlabelstyle)
         vbox.append(p8label, 'p8label')
 
         self.F_DustSensorSCL = gui.TextInput(width=200, height=30, style="margin:5px")
         self.F_DustSensorSCL.set_value(str(self.DustSensorSCL))
         vbox.append(self.F_DustSensorSCL, 'DustSensorSCL')
 
-        p9label = gui.Label("Dust Sensor SDA Pin", style='position:absolute; left:5px; top:40px;' + shortlabelstyle)
+        p9label = gui.Label("Dust Sensor SDA Pin", style='position:absolute; left:5px; top:40px;' + self.shortlabelstyle)
         vbox.append(p9label, 'p9label')
 
         self.F_DustSensorSDA = gui.TextInput(width=200, height=30, style="margin:5px")
         self.F_DustSensorSDA.set_value(str(self.DustSensorSDA))
         vbox.append(self.F_DustSensorSDA, 'DustSensorSDA')
 
-        p1label = gui.Label("Dust Sensor Power Pin", style='position:absolute; left:5px; top:40px;' + shortlabelstyle)
+        p1label = gui.Label("Dust Sensor Power Pin", style='position:absolute; left:5px; top:40px;' + self.shortlabelstyle)
         vbox.append(p1label, 'p1label')
 
         self.F_DustSensorPowerPin = gui.TextInput(width=200, height=30, style="margin:5px")
         self.F_DustSensorPowerPin.set_value(str(self.DustSensorPowerPin))
         vbox.append(self.F_DustSensorPowerPin, 'DustSensorPowerPin')
 
-        p2label = gui.Label("GPIO Fan Power Pin Sig1", style='position:absolute; left:5px; top:40px;' + shortlabelstyle)
+        p2label = gui.Label("GPIO Fan Power Pin Sig1", style='position:absolute; left:5px; top:40px;' + self.shortlabelstyle)
         vbox.append(p2label, 'p2label')
 
         self.F_GPIO_Pin_PowerDrive_Sig1 = gui.TextInput(width=200, height=30, style="margin:5px")
         self.F_GPIO_Pin_PowerDrive_Sig1.set_value(str(self.GPIO_Pin_PowerDrive_Sig1))
         vbox.append(self.F_GPIO_Pin_PowerDrive_Sig1, 'GPIO_Pin_PowerDrive_Sig1')
 
-        p3label = gui.Label("GPIO Fan Power Pin Sig2", style='position:absolute; left:5px; top:40px;' + shortlabelstyle)
+        p3label = gui.Label("GPIO Fan Power Pin Sig2", style='position:absolute; left:5px; top:40px;' + self.shortlabelstyle)
         vbox.append(p3label, 'p3label')
 
         self.F_GPIO_Pin_PowerDrive_Sig2 = gui.TextInput(width=200, height=30, style="margin:5px")
         self.F_GPIO_Pin_PowerDrive_Sig2.set_value(str(self.GPIO_Pin_PowerDrive_Sig2))
         vbox.append(self.F_GPIO_Pin_PowerDrive_Sig2, 'GPIO_Pin_PowerDrive_Sig2')
 
-        p4label = gui.Label("WatchDog Trigger Pin", style='position:absolute; left:5px; top:40px;' + shortlabelstyle)
+        p4label = gui.Label("WatchDog Trigger Pin", style='position:absolute; left:5px; top:40px;' + self.shortlabelstyle)
         vbox.append(p4label, 'p4label')
 
         self.F_WATCHDOGTRIGGER = gui.TextInput(width=200, height=30, style="margin:5px")
@@ -736,9 +732,6 @@ class SkyWeatherConfigure(App):
     def buildScreenMQTTR(self):
         # screen 7
         vbox = self.buildvbox("MQTT / Rest Tab")
-
-        # short headers
-        shortlabelstyle = 'font-family:monospace; width:200; font-size:15px; margin:5px; background:LightGray'
 
         P7Nheader = gui.Label("REST Interface", style='position:absolute; left:5px; top:30px;' + self.headerstyle)
         vbox.append(P7Nheader, 'P7Nheader')
@@ -753,7 +746,7 @@ class SkyWeatherConfigure(App):
                                                style='margin:5px; background: LightGray ')
         vbox.append(self.F_MQTT_Enable, 'self.F_MQTT_Enable')
 
-        p4label = gui.Label("MQTT Server URL ", style='position:absolute; left:5px; top:40px;' + shortlabelstyle)
+        p4label = gui.Label("MQTT Server URL ", style='position:absolute; left:5px; top:40px;' + self.shortlabelstyle)
         vbox.append(p4label, 'p4label')
 
         self.F_MQTT_Server_URL = gui.TextInput(width=200, height=30, style="margin:5px")
@@ -761,7 +754,7 @@ class SkyWeatherConfigure(App):
         vbox.append(self.F_MQTT_Server_URL, 'MQTT_Server_URL')
 
         p3label = gui.Label("MQTT Server Port Number ",
-                            style='position:absolute; left:5px; top:40px;' + shortlabelstyle)
+                            style='position:absolute; left:5px; top:40px;' + self.shortlabelstyle)
         vbox.append(p3label, 'p3label')
 
         self.F_MQTT_Port_Number = gui.TextInput(width=200, height=30, style="margin:5px")
@@ -769,7 +762,7 @@ class SkyWeatherConfigure(App):
         vbox.append(self.F_MQTT_Port_Number, 'MQTT_Port_Number')
 
         p2label = gui.Label("How Often MQTT Sent in Seconds ",
-                            style='position:absolute; left:5px; top:40px;' + shortlabelstyle)
+                            style='position:absolute; left:5px; top:40px;' + self.shortlabelstyle)
         vbox.append(p2label, 'p2label')
 
         self.F_MQTT_Send_Seconds = gui.TextInput(width=200, height=30, style="margin:5px")
@@ -781,9 +774,6 @@ class SkyWeatherConfigure(App):
     def buildScreenCamera(self):
         # screen 8
         vbox = self.buildvbox("Camera Options")
-
-        # short headers
-        shortlabelstyle = 'font-family:monospace; width:200; font-size:15px; margin:5px; background:LightGray'
 
         P5Nheader = gui.Label("Night Camera Enable", style='position:absolute; left:5px; top:30px;' + self.headerstyle)
         vbox.append(P5Nheader, 'P5Nheader')
@@ -866,6 +856,7 @@ class SkyWeatherConfigure(App):
         # configuation fields
         self.headerstyle = 'width:400px; font-family:monospace; font-size:20px; margin:10px; background:LightBlue'
         self.labelstyle = 'font-family:monospace; font-size:15px; margin:5px; background:LightGray'
+        self.shortlabelstyle = 'font-family:monospace; width:200; font-size:15px; margin:5px; background:LightGray'
 
         # because the menu is built in to each screen, we need the total list of keys to all of them
         screenkeys = ['DWM', 'MTN', 'PS-Max', 'WS-WU', 'B-WS', 'Pins', 'MQTTR', 'Camera']
