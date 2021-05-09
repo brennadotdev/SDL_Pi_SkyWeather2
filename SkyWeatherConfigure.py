@@ -423,26 +423,12 @@ class SkyWeatherConfigure(App):
 
     # screen builds
 
-    def buildmenubar(self):
+    def buildmenubar(self, keys):
         menu = gui.Menu(width='100%', height='30px')
-        m1 = gui.MenuItem('DMW', width=70, height=30)
-        m1.onclick.do(self.menu_screen1_clicked)
-        m2 = gui.MenuItem('MTN', width=70, height=30)
-        m2.onclick.do(self.menu_screen2_clicked)
-        m3 = gui.MenuItem('PSMax', width=70, height=30)
-        m3.onclick.do(self.menu_screen3_clicked)
-        m4 = gui.MenuItem('WS-WU', width=70, height=30)
-        m4.onclick.do(self.menu_screen4_clicked)
-        m5 = gui.MenuItem('B-WS', width=70, height=30)
-        m5.onclick.do(self.menu_screen5_clicked)
-        m6 = gui.MenuItem('Pins', width=70, height=30)
-        m6.onclick.do(self.menu_screen6_clicked)
-        m7 = gui.MenuItem('MQTTR', width=70, height=30)
-        m7.onclick.do(self.menu_screen7_clicked)
-        m8 = gui.MenuItem('Camera', width=70, height=30)
-        m8.onclick.do(self.menu_screen8_clicked)
-
-        menu.append([m1, m2, m3, m4, m5, m6, m7, m8])
+        for key in keys:
+            menuitem = gui.MenuItem(key, width=70, height=30)
+            menuitem.onclick.do(self.menuitemclicked)
+            menu.append(menuitem)
 
         menubar = gui.MenuBar(width='100%', height='30px')
         menubar.append(menu)
@@ -845,7 +831,6 @@ class SkyWeatherConfigure(App):
     ###################
 
     def main(self):
-
         self.readJSON()
 
         widthBox = 700
@@ -881,84 +866,41 @@ class SkyWeatherConfigure(App):
         self.mainContainer.append(reset)
 
         # configuation fields
-
         self.headerstyle = 'width:400px; font-family:monospace; font-size:20px; margin:10px; background:LightBlue'
         self.labelstyle = 'font-family:monospace; font-size:15px; margin:5px; background:LightGray'
 
+        # because the menu is built in to each screen, we need the total list of keys to all of them
+        screenkeys = ['DWM', 'MTN', 'PS-Max', 'WS-WU', 'B-WS', 'Pins', 'MQTTR', 'Camera']
+
         # build shared elements
-        self.menubar = self.buildmenubar()
+        self.menubar = self.buildmenubar(screenkeys)
 
-        # build screens
-
-        self.screen1 = self.buildScreen1()
-        self.screen2 = self.buildScreen2()
-        self.screen3 = self.buildScreen3()
-        self.screen4 = self.buildScreen4()
-        self.screen5 = self.buildScreen5()
-        self.screen6 = self.buildScreen6()
-        self.screen7 = self.buildScreen7()
-        self.screen8 = self.buildScreen8()
-
-        self.mainContainer.append(self.screen1, 'screen1')
+        self.setdefaultscreenstate()
 
         # returning the root widget
-
         return self.mainContainer
 
-    # listener functions
+    def setdefaultscreenstate(self):
+        self.screens = {
+            'DWM': self.buildScreen1(),
+            'MTN': self.buildScreen2(),
+            'PS-Max': self.buildScreen3(),
+            'WS-WU': self.buildScreen4(),
+            'B-WS': self.buildScreen5(),
+            'Pins': self.buildScreen6(),
+            'MQTTR': self.buildScreen7(),
+            'Camera': self.buildScreen8()
+        }
+        self.mainContainer.append(self.screens['DWM'], 'screen1')
 
+    # listener functions
     def removeAllScreens(self):
+        for key, screen in self.screens.items():
+            self.mainContainer.remove_child(screen)
 
-        self.mainContainer.remove_child(self.screen1)
-        self.mainContainer.remove_child(self.screen2)
-        self.mainContainer.remove_child(self.screen3)
-        self.mainContainer.remove_child(self.screen4)
-        self.mainContainer.remove_child(self.screen5)
-        self.mainContainer.remove_child(self.screen6)
-        self.mainContainer.remove_child(self.screen7)
-        self.mainContainer.remove_child(self.screen8)
-
-    # listener functions
-
-    def menu_screen1_clicked(self, widget):
+    def menuitemclicked(self, widget):
         self.removeAllScreens()
-        self.mainContainer.append(self.screen1, 'screen1')
-        print("menu screen1 clicked")
-
-    def menu_screen2_clicked(self, widget):
-        self.removeAllScreens()
-        self.mainContainer.append(self.screen2, 'screen2')
-        print("menu screen2 clicked")
-
-    def menu_screen3_clicked(self, widget):
-        self.removeAllScreens()
-        self.mainContainer.append(self.screen3, 'screen3')
-        print("menu screen3 clicked")
-
-    def menu_screen4_clicked(self, widget):
-        self.removeAllScreens()
-        self.mainContainer.append(self.screen4, 'screen4')
-        print("menu screen4 clicked")
-
-    def menu_screen5_clicked(self, widget):
-        self.removeAllScreens()
-        self.mainContainer.append(self.screen5, 'screen5')
-        print("menu screen5 clicked")
-
-    def menu_screen6_clicked(self, widget):
-        self.removeAllScreens()
-        self.mainContainer.append(self.screen6, 'screen6')
-        print("menu screen6 clicked")
-
-    def menu_screen7_clicked(self, widget):
-        self.removeAllScreens()
-        self.mainContainer.append(self.screen7, 'screen7')
-        print("menu screen7 clicked")
-
-    def menu_screen8_clicked(self, widget):
-        self.removeAllScreens()
-        self.mainContainer.append(self.screen8, 'screen8')
-        print("menu screen8 clicked")
+        self.mainContainer.append(self.screens[widget.text])
 
     def onCancel(self, widget, name='', surname=''):
         print("onCancel clicked")
@@ -980,19 +922,8 @@ class SkyWeatherConfigure(App):
     def onReset(self, widget, name='', surname=''):
         print("Reset clicked")
         self.removeAllScreens()
-        self.mainContainer.append(self.screen1, 'screen1')
         self.setDefaults()
-
-        self.screen1 = self.buildScreen1()
-        self.screen2 = self.buildScreen2()
-        self.screen3 = self.buildScreen3()
-        self.screen4 = self.buildScreen4()
-        self.screen5 = self.buildScreen5()
-        self.screen6 = self.buildScreen6()
-        self.screen7 = self.buildScreen7()
-        self.screen8 = self.buildScreen8()
-
-        self.mainContainer.append(self.screen1, 'screen1')
+        self.setdefaultscreenstate()
 
     def onSave(self, widget, name='', surname=''):
         print("onSave clicked")
