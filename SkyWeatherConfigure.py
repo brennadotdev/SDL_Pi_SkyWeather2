@@ -888,13 +888,13 @@ class SkyWeatherConfigure(App):
         if self.selectedscreen:
             self.vboxcontainer.remove_child(self.vboxcontainer.children[self.selectedscreen])
         self.selectedscreen = self.vboxcontainer.append(self.screens['DWM'], 'DWM')
-        print('Setting default screen ', self.selectedscreen)
+        print('Setting default screen', self.selectedscreen)
 
     # listener functions
     def menuitemclicked(self, widget):
         self.vboxcontainer.remove_child(self.vboxcontainer.children[self.selectedscreen])
         self.selectedscreen = self.vboxcontainer.append(self.screens[widget.text], widget.text)
-        print ('Selected screen ', self.selectedscreen)
+        print('Selected screen', self.selectedscreen)
 
     def onCancel(self, widget, name='', surname=''):
         print("onCancel clicked")
