@@ -1,4 +1,5 @@
 -- the event scheduler is off by default, this setting works for a session but will be reset if the service restarts
+-- be sure to run the enableMariaDbEventScheduler.sh script to enable the event scheduler across restarts
 SET GLOBAL event_scheduler=ON;
 
 USE WeatherSenseWireless;

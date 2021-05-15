@@ -6,6 +6,15 @@ See full bug list and info on releases at:<BR>
 
 https://forum.switchdoc.com/thread/1452/skyweather2-software-releases
 
+May 14, 2021 - Not a version - add maintenance scripts to prevent infinite db growth<BR>
+_Note:_ You will need to run the following commands to enable the maintenance events
+
+```bash
+cd SDL_Pi_SkyWeather2
+sudo sh enableMariaDbEventScheduler.sh
+sudo mysql -u root -p < TrimSkyWeather2Schema.sql
+sudo mysql -u root -p < TrimWeatherSenseWirelessSchema.sql
+```
 
 April 17, 2021 - Version 025 - fixes and updgrades<BR>
 March 12, 2021 - Version 024 - minor fixes, update on README.md for rtl_433<BR>
